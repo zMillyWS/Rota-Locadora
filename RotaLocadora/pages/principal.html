@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/Css/styles.css">
+    <link rel="stylesheet" href="/assets/Css/principal.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="/Js/script.js" defer></script>
+    <title>RotaLocadora</title>
+</head>
+
+<body>
+    <header><a href="/index.html"><img class="logo" src="/assets/img/Logo.png" alt="Logo"></a>
+
+        <button class="pages">VEÍCULOS</button>
+        <button class="pages">HISTÓRICO DE ATIVIDADES</button>
+
+
+        <div class="perfil">
+            <div>
+                <h5>Olá</h5>
+                <h4><span id="nomeDaPessoa"></span></h4>
+            </div>
+            <div class="perfil-image" id="profileIcon"><img src="/assets/img/Photo.png" alt="perfil"></div>
+        </div>
+        <!-- Popup que será exibido abaixo do ícone -->
+        <div class="user-menu" id="userMenu"><a href="/index.html"><img src="/assets/img/user-menu.png"
+                    alt="User Menu" /></a>
+
+        </div>
+    </header>
+    <div class="content">
+        <div class="content-header">
+            <div class="cadastrar-container"><button class="cadastrar-bottom" onclick="openModal()">Cadastrar
+                    Veículo</button></div>
+            <div class="right-container">
+
+                <div class="custom-select">
+                    <label class="select-label" id="selectLabel">Marca</label>
+                    <div class="select-header" onclick="toggleOptions()">
+                        <div class="selected-options" id="selectedOptions">
+
+                        </div>
+                    </div>
+                    <div class="select-options" id="selectOptions">
+                        <div>
+                            <input type="checkbox" id="Chevrolet" value="Chevrolet" onchange="updateSelectedOptions()">
+                            <label for="Chevrolet">Chevrolet</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="Ford" value="Ford" onchange="updateSelectedOptions()">
+                            <label for="Ford">Ford</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="Toyota" value="Toyota" onchange="updateSelectedOptions()">
+                            <label for="Toyota">Toyota</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="Volkswagen" value="Volkswagen"
+                                onchange="updateSelectedOptions()">
+                            <label for="Volkswagen">Volkswagen</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="custom-select">
+                    <label class="select-label">Propósito de uso</label>
+                    <div class="select-header" onclick="toggleOptionsProposito()">
+                        <span id="selectedOptionProposito">Selecione um propósito</span>
+                    </div>
+                    <div class="select-options" id="selectOptionsProposito">
+                        <div onclick="selectOptionProposito('Uso pessoal')">Uso pessoal</div>
+                        <div onclick="selectOptionProposito('Veículo para locação')">Veículo para locação</div>
+                        <div onclick="selectOptionProposito('Uso de empresa')">Uso de empresa</div>
+                    </div>
+                </div>
+
+                <div class="custom-select">
+                    <label class="select-label" for="inputPlaca">Placa</label>
+                    <div class="select-header-placa">
+                        <input type="text" id="inputPlaca" placeholder="Digite a placa ou a cor do veículo">
+                    </div>
+                </div>
+
+                <div class="icons-container">
+                    <div class="box">
+                        <img src="/assets/img/magnifying-glass.png" alt="Lupa" class="icon">
+                    </div>
+                    <div class="divider"></div>
+                    <div class="box">
+                        <img src="/assets/img/erase.png" alt="Apagar" class="icon">
+                    </div>
+                </div>
+                <div class="filter-container"><img src="/assets/img/bars-filter.png" alt="filter"></div>
+
+            </div>
+        </div>
+
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Marca/Modelo</th>
+                        <th>Ano</th>
+                        <th>Cor</th>
+                        <th>Propósito de uso</th>
+                        <th>Zero-quilômetro?</th>
+                        <th>Nível de conforto</th>
+                        <th>Local de repouso (lat, long)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As linhas serão adicionadas dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li class="disabled"><a href="#">&#60;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&#62;</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-historico">
+        <div class="content-header-historico">
+            <div class="custom-select">
+                <label class="select-label" for="inputPlacaHistorico">Placa</label>
+                <div class="select-header-placa">
+                    <input type="text" id="inputPlacaHistorico" placeholder="Digite a placa ou a cor do veículo">
+                </div>
+            </div>
+
+            <div class="icons-container">
+                <div class="box">
+                    <img src="/assets/img/magnifying-glass.png" alt="Lupa" class="icon">
+                </div>
+                <div class="divider"></div>
+                <div class="box">
+                    <img src="/assets/img/erase.png" alt="Editar" class="icon">
+                </div>
+            </div>
+            <div class="filter-container"><img src="/assets/img/bars-filter.png" alt="filter"></div>
+
+        </div>
+
+        <div class="historico-container">
+        </div>
+
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li class="disabled"><a href="#">&#60;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&#62;</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="deleteMessage" class="delete-message">
+        <img src="/assets/img/mensagem-deletar.png" alt="Mensagem de deletar">
+    </div>
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal" class="modal">
+            <div class="modal-header">
+                Cadastro de Veículo
+                <button class="xmark" onclick="closeModal()"><img class="xmark"
+                        src="/assets/img/png-clipart-black-n-white-x-mark-illustration-removebg-preview.png"
+                        alt="x"></button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-left">
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputPlacaModal">Placa</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputPlacaModal" placeholder="Digite a placa">
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputModeloModal">Modelo</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputModeloModal" placeholder="Digite o modelo">
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputModeloModal">Cor</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputCorModal" placeholder="Digite a cor">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-right">
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" id="selectLabelMarcaModal">Marca</label>
+                        <div class="select-modal" onclick="toggleOptionsMarcaModal()">
+                            <span class="placeholder-modal" id="selectedOptionMarcaModal">Selecione uma Marca</span>
+                        </div>
+                        <div class="select-options-modal" id="selectOptionsMarcaModal">
+                            <div onclick="selectOptionMarcaModal('Chevrolet')">Chevrolet</div>
+                            <div onclick="selectOptionMarcaModal('Ford')">Ford</div>
+                            <div onclick="selectOptionMarcaModal('Toyota')">Toyota</div>
+                            <div onclick="selectOptionMarcaModal('Toyota')">Volkswagem</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <div class="container-year">
+                            <label class="select-label-modal">Ano</label>
+                            <div class="select-modal" id="select-trigger">
+                                <span class="placeholder-modal" id="year-placeholder">Selecione um ano</span>
+                            </div>
+                            <div class="year-display" id="year-display">
+                                <div class="top-section">
+                                    <div class="current-year">2024</div>
+                                </div>
+                                <div class="infinite-years" id="infinite-years"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal">Propósito de uso</label>
+                        <div class="select-modal" onclick="toggleOptionsPropositoModal()">
+                            <span class="placeholder-modal" id="selectedOptionPropositoModal">Selecione um
+                                propósito</span>
+                        </div>
+                        <div class="select-options-modal" id="selectOptionsPropositoModal">
+                            <div onclick="selectOptionPropositoModal('Uso pessoal')">Uso pessoal</div>
+                            <div onclick="selectOptionPropositoModal('Veículo para locação')">Veículo para locação</div>
+                            <div onclick="selectOptionPropositoModal('Uso de empresa')">Uso de empresa</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-content-bottom">
+                <h5>Local de Repouso do veículo</h5>
+                <div class="top-container">
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputLatitudade">Latitude</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputLatitudeModal" placeholder="Digite a latitude">
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputLongitude">Longitude</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputLongitudeModal" placeholder="Digite a longitude">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc-container">
+                    <h5>Nível de conforto do veículo</h5>
+                    <div class="stars">
+                        <img src="/assets/img/star.png" alt="star" data-index="1">
+                        <img src="/assets/img/star.png" alt="star" data-index="2">
+                        <img src="/assets/img/star.png" alt="star" data-index="3">
+                        <img src="/assets/img/star.png" alt="star" data-index="4">
+                        <img src="/assets/img/star.png" alt="star" data-index="5">
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="veiculoZeroKm">
+                    <label for="veiculoZeroKm">Veículo zero-quilômetro</label>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button>Salvar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal para Edição de Veículo -->
+    <div id="modal-overlay-edit" class="modal-overlay">
+        <div id="modalEditar" class="modal">
+            <div class="modal-header">
+                Edição de Veículo
+                <button class="xmark" onclick="closeModalEditar()"><img class="xmark"
+                        src="/assets/img/png-clipart-black-n-white-x-mark-illustration-removebg-preview.png"
+                        alt="x"></button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-left">
+                    <div class="custom-select">
+                        <label id="placa-modal-edit" class="select-label-modal"
+                            for="inputPlacaModalEditar">Placa</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputPlacaModalEditar" placeholder="Digite a placa" readonly>
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputModeloModalEditar">Modelo</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputModeloModalEditar" placeholder="Digite o modelo">
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputCorModalEditar">Cor</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputCorModalEditar" placeholder="Digite a cor">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-right">
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" id="selectLabelMarcaModalEditar">Marca</label>
+                        <div class="select-modal" onclick="toggleOptionsMarcaModalEditar()">
+                            <span class="placeholder-modal" id="selectedOptionMarcaModalEditar">Selecione uma
+                                Marca</span>
+                        </div>
+                        <div class="select-options-modal" id="selectOptionsMarcaModalEditar">
+                            <div onclick="selectOptionMarcaModalEditar('Chevrolet')">Chevrolet</div>
+                            <div onclick="selectOptionMarcaModalEditar('Ford')">Ford</div>
+                            <div onclick="selectOptionMarcaModalEditar('Toyota')">Toyota</div>
+                            <div onclick="selectOptionMarcaModalEditar('Volkswagem')">Volkswagem</div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <div class="container-year">
+                            <label class="select-label-modal">Ano</label>
+                            <div class="select-modal" id="select-trigger-editar">
+                                <span class="placeholder-modal" id="year-placeholder-editar">Selecione um ano</span>
+                            </div>
+                            <div class="year-display" id="year-display-editar">
+                                <div class="top-section">
+                                    <div class="current-year">2024</div>
+                                </div>
+                                <div class="infinite-years" id="infinite-years-editar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal">Propósito de uso</label>
+                        <div class="select-modal" onclick="toggleOptionsPropositoModalEditar()">
+                            <span class="placeholder-modal" id="selectedOptionPropositoModalEditar">Selecione um
+                                propósito</span>
+                        </div>
+                        <div class="select-options-modal" id="selectOptionsPropositoModalEditar">
+                            <div onclick="selectOptionPropositoModalEditar('Uso pessoal')">Uso pessoal</div>
+                            <div onclick="selectOptionPropositoModalEditar('Veículo para locação')">Veículo para locação
+                            </div>
+                            <div onclick="selectOptionPropositoModalEditar('Uso de empresa')">Uso de empresa</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-content-bottom">
+                <h5>Local de Repouso do veículo</h5>
+                <div class="top-container">
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputLatitudeModalEditar">Latitude</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputLatitudeModalEditar" placeholder="Digite a latitude">
+                        </div>
+                    </div>
+
+                    <div class="custom-select">
+                        <label class="select-label-modal" for="inputLongitudeModalEditar">Longitude</label>
+                        <div class="modal-placa">
+                            <input type="text" id="inputLongitudeModalEditar" placeholder="Digite a longitude">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc-container">
+                    <h5>Nível de conforto do veículo</h5>
+                    <div class="stars">
+                        <img src="/assets/img/star.png" alt="star" data-index="1">
+                        <img src="/assets/img/star.png" alt="star" data-index="2">
+                        <img src="/assets/img/star.png" alt="star" data-index="3">
+                        <img src="/assets/img/star.png" alt="star" data-index="4">
+                        <img src="/assets/img/star.png" alt="star" data-index="5">
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="veiculoZeroKmEditar">
+                    <label for="veiculoZeroKmEditar">Veículo zero-quilômetro</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnSalvarEdicao" onclick="salvarEdicao()">Salvar</button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal para ações (Detalhes, Editar, Deletar) -->
+    <div id="actionsModal" class="actions-modal">
+        <div class="actions-modal-item" onclick="openDetails()">Detalhes</div>
+        <div class="actions-modal-item" onclick="openEdit()">Editar</div>
+        <div class="actions-modal-item" onclick="deletarVeiculo()">Deletar</div>
+    </div>
+
+    <!-- Modal do veículo -->
+    <div id="vehicleModal" class="vehicle-modal">
+        <div class="vehicle-modal-content">
+            <!-- Header azul -->
+            <div class="vehicle-modal-header">
+                <h2>Detalhes do Veículo</h2>
+                <span class="vehicle-close">&times;</span>
+            </div>
+            <!-- Corpo do modal -->
+            <div class="vehicle-modal-body">
+                <!-- Container de informações -->
+                <div class="vehicle-info-container">
+                    <!-- Primeira linha -->
+                    <div class="vehicle-info-row">
+                        <!-- Ícone do carro -->
+                        <div class="vehicle-car-icon"><img src="/assets/img/Veículo.png" alt="Ícone do carro"></div>
+                        <!-- Placa -->
+                        <div>
+                            <div class="vehicle-label">Placa</div>
+                            <div class="vehicle-value" id="vehiclePlate">ABC-1234</div>
+                        </div>
+                        <!-- Marca -->
+                        <div>
+                            <div class="vehicle-label">Marca</div>
+                            <div class="vehicle-value" id="vehicleBrand">Mitsubishi</div>
+                        </div>
+                        <!-- Ano -->
+                        <div>
+                            <div class="vehicle-label">Ano</div>
+                            <div class="vehicle-value" id="vehicleYear">2023</div>
+                        </div>
+                        <!-- Cor -->
+                        <div>
+                            <div class="vehicle-label">Cor</div>
+                            <div class="vehicle-value" id="vehicleColor">Preto</div>
+                        </div>
+                        <!-- Propósito de uso -->
+                        <div>
+                            <div class="vehicle-label">Propósito de uso</div>
+                            <div class="vehicle-value" id="vehiclePurpose">Uso pessoal</div>
+                        </div>
+                    </div>
+                    <!-- Segunda linha -->
+                    <div class="vehicle-info-row second-row">
+                        <!-- Zero-quilômetro? -->
+                        <div>
+                            <div class="vehicle-label">Zero-quilômetro?</div>
+                            <div class="vehicle-value" id="vehicleZeroKm">Não</div>
+                        </div>
+                        <!-- Nível de conforto -->
+                        <div>
+                            <div class="vehicle-label">Nível de conforto</div>
+                            <div class="vehicle-value" id="vehicleComfortLevel">4</div>
+                            <img src="/assets/img/star-solid.png" alt="Estrela" class="vehicle-star-icon">
+                        </div>
+                    </div>
+                </div>
+                <div id="vehicle-map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+</body>
+
+</html>

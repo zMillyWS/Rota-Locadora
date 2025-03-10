@@ -1,0 +1,300 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-image: url(https://s3-alpha-sig.figma.com/img/8c16/8025/7da3b6254cb7ef89dab0de7a428818ba?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=fcX32qUAAnIik6yDLTZDYNNnRdXkMdk-rh5abY2nlMOAKO3~j2fKG0WELV7LnWmYmGjY2S45F0AJ90T5mxWdNX2i1t8YgvX3~iYavRqxm-aUhxJ1r3~jHfS~GTQm-nnzC-8bWBIH4agKSLF3EtnuL5cSmK4yxonX9KXGedCejc8ifcaoMgsbLQ8WzSMWmI2emM4q4AokKXLZlFCeeeLdM5hn0GP5Ms-EuhDFzF9oNPPisItejksr7hFvf75~eu5P6nOviHnKSpdrtr90ohlvI9ZFgwrbWJEB5jQtHv97kJLhJEJwDybqheM3FID4-IHxUGUfKxnFz8dn7W3DSLrn9Q__);
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+    width: 480px;
+    height: 460px;
+    top: 344px;
+    left: 720px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.418);
+}
+
+.icon-car-blue {
+    margin: 20px 0 25px 0;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23.44px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+}
+
+.form-group label {
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    background: aliceblue;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    /* Tamanho do ícone */
+    color: #333;
+    /* Cor do ícone */
+}
+
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0 25px 0;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.linkmodal {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    color: #bbb;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.linkmodal:hover {
+    text-decoration: underline;
+}
+
+.container-cadastro {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aliceblue;
+    width: 480px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.418);
+    display: none;
+}
+
+
+.select-label {
+    font-size: 14px;
+    /* Cor do texto do rótulo */
+    position: absolute;
+    top: -10px;
+    /* Posição do rótulo sobre o seletor */
+    left: 10px;
+    /* Lateral do seletor */
+    background: aliceblue;
+    /* Fundo branco para melhor contraste */
+    padding: 0 5px;
+    /* Espaçamento lateral */
+    z-index: 1;
+    /* Colocar o rótulo acima do seletor */
+}
+
+.select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: rgb(136, 136, 136);
+    /* Cor do texto do placeholder */
+    background: aliceblue;
+    cursor: pointer;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    /* Tamanho do ícone */
+    color: #333;
+    /* Cor do ícone */
+}
+
+
+/* Estilos personalizados do Pikaday */
+.pika-single {
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 265px;
+}
+
+.pika-title {
+    background: #f5f5f5;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.pika-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.pika-prev,
+.pika-next {
+    color: #666;
+    padding: 5px;
+}
+
+.pika-prev:hover,
+.pika-next:hover {
+    color: #000;
+}
+
+.pika-table th {
+    color: #666;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.pika-table td {
+    padding: 5px;
+}
+
+.pika-button {
+    color: #333;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 30px;
+    margin: 2px;
+}
+
+.pika-button:hover {
+    background-color: #007bff !important;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.is-today .pika-button {
+    border: 1px solid #007bff;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.is-selected .pika-button {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.is-disabled .pika-button {
+    color: #ccc;
+}
+
+/* Estilo para a mensagem de erro */
+.mensagem-erro {
+    position: fixed;
+    top: 50%;
+    /* Posiciona no centro vertical */
+    left: 50%;
+    /* Posiciona no centro horizontal */
+    transform: translate(-50%, -50%);
+    /* Centraliza exatamente no meio */
+    z-index: 1000;
+    text-align: center;
+    /* Sombra para destacar */
+    transition: opacity 1s ease-in-out;
+}
+
+.mensagem-erro img {
+    width: 180px;
+}
+
+
+/* Classe para o efeito de fade-out */
+.fade-out,
+.mensagem-erro-cadastro.fade-out,
+.mensagem-sucesso.fade-out {
+    opacity: 0;
+    /* Torna a mensagem transparente */
+}
+
+.mensagem-erro-cadastro,
+.mensagem-sucesso {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.mensagem-sucesso {
+    background-color: rgb(7, 173, 7);
+}

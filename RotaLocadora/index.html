@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/Css/styles.css">
+    <link rel="stylesheet" href="/assets/Css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+    <title>RotaLocadora</title>
+</head>
+<!-- Cadastro Sucesso -->
+<div id="mensagemSucesso" class="mensagem-sucesso" style="display: none;">
+    Cadastro realizado com sucesso!
+</div>
+
+<!-- Div para exibir a mensagem de erro de data de nascimento inválida -->
+<div id="mensagemErroData" class="mensagem-erro-cadastro" style="display: none;">
+    Data de nascimento inválida. Por favor, insira uma data válida.
+</div>
+
+<!-- Div para exibir a mensagem de erro -->
+<div id="mensagemErro" class="mensagem-erro" style="display: none;">
+    <img src="/assets/img/mensagem-email-senha-incorretos.png" alt="Mensagem de erro">
+</div>
+
+<!-- Div para exibir a mensagem de erro de e-mail já cadastrado -->
+<div id="mensagemErroCadastro" class="mensagem-erro-cadastro" style="display: none;">
+    E-mail já está em uso. Por favor, use outro e-mail.
+</div>
+
+<div class="container">
+    <img src="/assets/img/car-garage-solid-blue.png" class="icon-car-blue" alt="logo">
+    <h2>Login</h2>
+    <form id="loginForm" action="/pages/principal.html" method="GET">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Digite o e-mail" required />
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite a senha" required>
+            <img src="/assets/img/Eye.png" class="toggle-password" id="toggleSenha" alt="Mostrar Senha">
+        </div>
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    <a href="#" class="linkmodal" id="openModal">Criar conta</a>
+</div>
+
+<div class="container-cadastro">
+    <img src="/assets/img/car-garage-solid-blue.png" class="icon-car-blue" alt="logo">
+    <h2>Novo Cadastro</h2>
+    <form>
+        <div class="form-group">
+            <label for="username">Nome de usuário</label>
+            <input type="text" id="username" name="username" placeholder="Digite o nome de usuário" required />
+        </div>
+        <div class="form-group" onclick="">
+            <label class="select-label">Data de aniversário</label>
+            <div class="select" id="selected-date">Selecione a data de aniversário <span class="icon"><i
+                        class="fas fa-angle-down"></i></span>
+                <input type="hidden" id="birthday" />
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Digite o e-mail" required />
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha-cadastro" name="senha" placeholder="Digite a senha" required>
+            <img src="/assets/img/Eye.png" class="toggle-password" id="toggleSenhaCadastro" alt="Mostrar Senha">
+        </div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+    <a href="#" class="linkmodal" id="closeModal">Fazer login</a>
+
+</div>
+<script src="/Js/scriptlogin.js"></script>
+</body>
+
+</html>
